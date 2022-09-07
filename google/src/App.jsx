@@ -2,18 +2,24 @@ import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
-  const { loginWithRedirect } = useAuth0();
-  const { logout } = useAuth0();
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  console.log(user);
   return (
     <div className="App">
-      <h1>Login With Google</h1>
+      <h1>Login with google</h1>
       {isAuthenticated ? (
-        <li>
-          <button onClick={() => logout({ returnTo: window.location.origin })}>
-            Log Out
-          </button>
-        </li>
+        <p>
+          {user.name}
+          {"         "}
+          {"         "}
+          {user.email}
+        </p>
+      ) : null}
+
+      {isAuthenticated ? (
+        <button onClick={() => logout({ returnTo: window.location.origin })}>
+          Log Out
+        </button>
       ) : (
         <li>
           <button onClick={() => loginWithRedirect()}>Log In</button>
